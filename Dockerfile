@@ -2,14 +2,21 @@ FROM debian:jessie
 MAINTAINER Viktor Farcic "viktor@farcic.com"
 
 # Packages
-RUN echo "deb mirror://mirrors.ubuntu.com/mirrors.txt utopic main restricted universe multiverse \n\
-    deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-updates main restricted universe multiverse \n\
-    deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-backports main restricted universe multiverse \n\
-    deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-security main restricted universe multiverse" > /etc/apt/sources.list.d/all-mirrors.list
+#RUN echo "deb mirror://mirrors.ubuntu.com/mirrors.txt utopic main restricted universe multiverse \n\
+#    deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-updates main restricted universe multiverse \n\
+#    deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-backports main restricted universe multiverse \n\
+#    deb mirror://mirrors.ubuntu.com/mirrors.txt utopic-security main restricted universe multiverse" > /etc/apt/sources.list.d/all-mirrors.list
+#RUN apt-get update && \
+#    apt-get install -y --force-yes --no-install-recommends openjdk-7-jdk mongodb && \
+#    apt-get clean && \
+#    rm -rf /var/lib/apt/lists/*
+
+RUN echo "deb http://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
 RUN apt-get update && \
-    apt-get install -y --force-yes --no-install-recommends openjdk-7-jdk mongodb && \
+    apt-get -y --force-yes install --no-install-recommends openjdk-7-jdk mongodb wget sbt && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
 
 # MongoDB files
 RUN mkdir -p /data/db
