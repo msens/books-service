@@ -48,7 +48,7 @@ trait ServiceRoute extends HttpService with DefaultJsonProtocol {
   implicit val booksFormat = jsonFormat4(Book)
   val collection: MongoCollection
 
-  val serviceRoute = pathPrefix("api" / "v1" / "books") {
+  val serviceRoute = pathPrefix("api" / "v1" / "books_comics") {
     path("_id" / IntNumber) { id =>
       get {
         complete(
